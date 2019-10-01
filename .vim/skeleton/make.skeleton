@@ -1,0 +1,28 @@
+
+CC := g++
+WARN := -Wall -Wextra -Wconversion
+
+# debug settings, uncomment when debugging
+CCOPTS := $(WARN) -O -g
+
+# optimization setting, uncomment when done with debugging
+# CCOPTS := $(WARN) -O3 -DNDEBUG
+
+# link executable when an .o is newer
+foobar : foobar.o foo.o bar.o
+	$(CC) -o $@ $^
+
+
+# how to compile .c files
+%.o : %.c
+	$(CC) $(CCOPTS) -c -o $@ $<
+
+
+# remove object files and executable
+clean:
+	rm -rf *.o # add main file name here
+
+
+# fie dependecies. paste output of g++ -MM *.c here
+# if one file on the rhs is newer, use rule to update lhs
+
